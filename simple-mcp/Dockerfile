@@ -1,25 +1,18 @@
 # syntax=docker/dockerfile:1
 
-FROM node:20-slim AS base
+FROM node:20-alpine
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm ci
+# Instala dependencias
+COPY package*.json ./
+RUN npm install --omit=dev
 
-COPY tsconfig.json ./
-COPY src ./src
+# Copia el resto del código
+COPY . .
 
-RUN npm run build
+# Si necesitas compilar TypeScript, hazlo aquí
+# RUN npm run build
 
-FROM node:20-slim AS runner
-
-WORKDIR /app
-ENV NODE_ENV=production
-
-COPY package.json package-lock.json ./
-RUN npm ci --omit=dev
-
-COPY --from=base /app/build ./build
-
-CMD ["node", "build/main.js"]
+# Ajusta el entrypoint a tu servidor MCP
+CMD ["node", "src/main.js"]
