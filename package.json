@@ -1,11 +1,14 @@
 {
   "name": "bff-concept",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "MCP Weather Service Demo",
+  "main": "src/main.ts",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsx src/main.ts",
+    "dev": "tsx src/main.ts",
+    "inspect": "npx @modelcontextprotocol/inspector -- npx tsx src/main.ts",
+    "build": "tsc --project tsconfig.json"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +17,10 @@
     "@modelcontextprotocol/sdk": "^1.18.1",
     "zod": "^3.25.76"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@modelcontextprotocol/inspector": "^0.15.0",
+    "@types/node": "^24.5.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  }
 }
