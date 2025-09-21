@@ -3,13 +3,13 @@
     "target": "ES2022",
     "module": "Node16",
     "moduleResolution": "Node16",
-    "outDir": "./build",
-    "rootDir": "./src",
+    "outDir": "simple-mcp/build",
+    "rootDir": "simple-mcp/src",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"],
+  "include": ["simple-mcp/src/**/*"],
   "exclude": ["node_modules"]
 }
