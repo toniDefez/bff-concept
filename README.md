@@ -85,3 +85,21 @@ mcp.json         # Configuración del servidor MCP
 - `@modelcontextprotocol/inspector`: Herramienta de inspección para desarrollo
 - `zod`: Validación de esquemas
 - `tsx`: Ejecutor de TypeScript
+
+## Docker
+
+También puedes ejecutar el servicio dentro de un contenedor Docker.
+
+### Construir la imagen
+
+```bash
+docker build -t bff-concept .
+```
+
+### Ejecutar el contenedor
+
+```bash
+docker run --rm -it bff-concept
+```
+
+El contenedor ejecuta el servidor MCP compilado (`node build/main.js`).
