@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "tsx main.ts"
+    "start": "tsx main.ts",
+    "dev": "tsx watch main.ts"
   },
   "keywords": [],
   "author": "",
@@ -12,9 +13,15 @@
   "dependencies": {
     "@langchain/core": "^0.3.77",
     "@langchain/groq": "^0.2.4",
-    "dotenv": "^17.2.2"
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.5.2",
     "tsx": "^4.16.2",
     "typescript": "^5.6.2"
   }
