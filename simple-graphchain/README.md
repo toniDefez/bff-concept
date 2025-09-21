@@ -11,7 +11,8 @@ Variables opcionales:
 
 - GROQ_MODEL (por defecto llama-3.3-70b-versatile)
 - GROQ_TEMPERATURE (por defecto 0)
-- SYSTEM_PROMPT para prefijar un mensaje de sistema
+- SYSTEM_PROMPT para prefijar un mensaje de sistema (si no se define se usa
+  "Eres un asistente útil y colaborativo. Responde de forma breve y clara.")
 - PORT o SERVER_PORT para cambiar el puerto (por defecto 3000)
 
 ## Uso

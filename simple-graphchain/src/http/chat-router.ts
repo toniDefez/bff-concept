@@ -2,7 +2,7 @@ import { Router, type Request, type Response } from "express";
 import {
   EmptyAIResponseError,
   type ChatService,
-} from "./chat-service.js";
+} from "../services/chat-service.js";
 
 export function createChatRouter(chatService: ChatService) {
   const router = Router();

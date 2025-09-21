@@ -2,8 +2,8 @@ import "dotenv/config";
 import cors from "cors";
 import express, { type Request, type Response } from "express";
 import { pathToFileURL } from "url";
-import { createChatRouter } from "./chat-router.js";
-import { createChatService } from "./chat-service.js";
+import { createChatRouter } from "./http/chat-router.js";
+import { createChatService } from "./services/chat-service.js";
 
 const PORT = Number.parseInt(
   process.env.PORT ?? process.env.SERVER_PORT ?? "3000",
