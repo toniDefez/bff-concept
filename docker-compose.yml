@@ -1,9 +1,26 @@
-﻿services:
-  mcp:
-    build: ./simple-mcp
-    container_name: storyteller-mcp
-    ports:
-      - "3000:3000"
+services:
+  graphchain:
+    build: ./simple-graphchain
+    container_name: simple-graphchain
+    env_file:
+      - ./simple-graphchain/.env
     environment:
-      - NODE_ENV=production
+      NODE_ENV: production
+      GROQ_MODEL: ${GROQ_MODEL:-llama-3.3-70b-versatile}
+      GROQ_TEMPERATURE: ${GROQ_TEMPERATURE:-0}
+      SYSTEM_PROMPT: ${SYSTEM_PROMPT:-Eres un asistente útil y colaborativo. Responde de forma breve y clara.}
+    ports:
+      - "3001:3000"
+    restart: unless-stopped
+
+  front:
+    build:
+      context: ./simple-front
+      args:
+        VITE_API_BASE_URL: ${FRONT_API_BASE_URL:-http://localhost:3001}
+    container_name: simple-front
+    ports:
+      - "4173:4173"
+    depends_on:
+      - graphchain
     restart: unless-stopped

@@ -1,4 +1,4 @@
-import { ChatPromptTemplate, MessagesPlaceholder } from "@langchain/core/prompts";
+import { ChatPromptTemplate } from "@langchain/core/prompts";
 
 const DEFAULT_SYSTEM_PROMPT =
   "Eres un asistente útil y colaborativo. Responde de forma breve y clara.";
@@ -10,7 +10,7 @@ export function createChatPrompt(systemPrompt?: string) {
 
   return ChatPromptTemplate.fromMessages([
     ["system", system],
-    new MessagesPlaceholder("conversation"),
+    ["user", "{input}"],
   ]);
 }
 

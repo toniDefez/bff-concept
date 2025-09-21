@@ -24,6 +24,10 @@ Instala dependencias y arranca el servidor:
 
 Esto deja el API escuchando en http://localhost:3000.
 
+Para Docker Compose, asegúrate de guardar tu clave en `simple-graphchain/.env`
+siguiendo el ejemplo del archivo `.env_example`; el `docker-compose.yml`
+cargará ese archivo automáticamente.
+
 ## Endpoint
 
 POST /chat

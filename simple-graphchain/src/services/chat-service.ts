@@ -1,8 +1,4 @@
 import { createGroqClient, type GroqChatModel } from "../integrations/groq-client.js";
-import {
-  extractTextFromContent,
-  toLangChainMessages,
-} from "../lib/message-format.js";
 import { createChatPrompt, DEFAULT_SYSTEM_PROMPT } from "../lib/prompt-factory.js";
 import {
   type ChatPayload,
@@ -29,6 +25,35 @@ interface ChatServiceDependencies {
   systemPrompt?: string;
 }
 
+function normalizeContent(content: unknown): string {
+  if (typeof content === "string") {
+    return content.trim();
+  }
+
+  if (Array.isArray(content)) {
+    return content
+      .map((part) => {
+        if (typeof part === "string") {
+          return part;
+        }
+
+        if (part && typeof part === "object" && "text" in part) {
+          return String((part as { text?: unknown }).text ?? "");
+        }
+
+        return "";
+      })
+      .join("\n")
+      .trim();
+  }
+
+  if (content && typeof content === "object" && "text" in content) {
+    return String((content as { text?: unknown }).text ?? "").trim();
+  }
+
+  return "";
+}
+
 class DefaultChatService implements ChatService {
   private readonly promptTemplate: ReturnType<typeof createChatPrompt>;
 
@@ -41,12 +66,11 @@ class DefaultChatService implements ChatService {
   }
 
   async createChatCompletion(payload: ChatPayload): Promise<string> {
-    const conversation = toLangChainMessages(payload.messages);
     const promptMessages = await this.promptTemplate.formatMessages({
-      conversation,
+      input: payload.prompt,
     });
     const aiMessage = await this.deps.model.invoke(promptMessages);
-    const content = extractTextFromContent(aiMessage.content);
+    const content = normalizeContent(aiMessage.content);
 
     if (!content) {
       throw new EmptyAIResponseError();

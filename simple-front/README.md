@@ -8,7 +8,8 @@ Interfaz mínima en React para conversar con el backend de IA expuesto por este 
 
         npm install
 
-2. (Opcional) Crea un archivo .env en la raíz con la URL del BFF si es distinta a http://localhost:3000:
+2. (Opcional) Crea un archivo .env en la raíz con la URL del BFF si es distinta
+   a la usada por defecto.
 
         VITE_API_BASE_URL=http://localhost:3000
 
@@ -20,4 +21,9 @@ Interfaz mínima en React para conversar con el backend de IA expuesto por este 
 
 ## Integración con el BFF
 
-El front envía peticiones POST al endpoint /chat. Si el servicio está montado en otra ruta o dominio, actualiza la variable VITE_API_BASE_URL para apuntar al nuevo endpoint.
+- En desarrollo (`npm run dev`) las peticiones a `/api/chat` se proxian al
+  backend local en `http://localhost:3000`.
+- En la build de producción, define `VITE_API_BASE_URL` para apuntar al host del
+  backend accesible desde el navegador (por ejemplo `http://localhost:3001` si
+  se ejecuta via Docker Compose).
+- El cliente envía `POST /chat` con `{ "prompt": "..." }`.
